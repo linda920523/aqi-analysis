@@ -5,10 +5,13 @@
 ```
 0224homework/
 ├── data/          # 存放原始資料
-├── outputs/       # 存放分析結果
+├── outputs/       # 存放分析結果  
 ├── .env          # API設定檔
 ├── .gitignore    # Git忽略設定
-└── README.md     # 專案說明
+├── requirements.txt  # Python套件依賴
+├── aqi_api.py        # AQI API 串接與分析主程式
+├── main.py           # 入口檔（建議執行這個）
+└── README.md         # 專案說明
 ```
 
 ## 環境設定
@@ -16,6 +19,17 @@
 1. 在 `.env` 檔案中加入您的API金鑰：
 ```
 API_KEY=your_api_key_here
+MOENV_API_KEY=your_api_key_here
+```
+
+2. 安裝套件：
+```
+pip install -r requirements.txt
+```
+
+3. 執行程式（會輸出 CSV/JSON/HTML 地圖到 `outputs/`）：
+```
+python main.py
 ```
 
 ## 使用說明
