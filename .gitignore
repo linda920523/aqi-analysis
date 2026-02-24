@@ -53,7 +53,6 @@ Thumbs.db
 # data/
 
 # Output files
-outputs/
 *.log
 
 # Temporary files

@@ -1,0 +1,2929 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_b1f7d16257cd39e5c509b478b0a193be {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+        <div style="position: fixed; 
+                    bottom: 50px; left: 50px; width: 180px; height: 120px; 
+                    background-color: white; border:2px solid grey; z-index:9999; 
+                    font-size:14px; padding: 10px">
+        <h4>AQI 圖例</h4>
+        <p><i class="fa fa-circle" style="color:green"></i> 0-50</p>
+        <p><i class="fa fa-circle" style="color:yellow"></i> 51-100</p>
+        <p><i class="fa fa-circle" style="color:red"></i> 101+</p>
+        </div>
+        
+    
+        <div style="position: fixed; 
+                    bottom: 50px; right: 50px; width: 200px; height: 120px; 
+                    background-color: white; border:2px solid grey; z-index:9999; 
+                    font-size:14px; padding: 10px">
+        <h4>空氣品質統計</h4>
+        <p><b>總測站數:</b> 85</p>
+        <p><b>有效AQI:</b> 85</p>
+        <p><b>平均AQI:</b> 79.9</p>
+        <p><b>最高AQI:</b> 108</p>
+        </div>
+        
+    
+            <div class="folium-map" id="map_b1f7d16257cd39e5c509b478b0a193be" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_b1f7d16257cd39e5c509b478b0a193be = L.map(
+                "map_b1f7d16257cd39e5c509b478b0a193be",
+                {
+                    center: [24.011153777294115, 120.80917845882352],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 8,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_ed13834f0997af2bf0923b01b2e700d1 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_ed13834f0997af2bf0923b01b2e700d1.addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+            var circle_marker_60fa3b460bad56e79dec44a1f038a10b = L.circleMarker(
+                [25.129167, 121.760056],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_17de256b103aa01da2b87c7d9cff3fa9 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_4a40d317392383e4028def669cefd22b = $(`<div id="html_4a40d317392383e4028def669cefd22b" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 基隆<br>                     <b>縣市:</b> 基隆市<br>                     <b>AQI:</b> 86                 </div>                 </div>`)[0];
+                popup_17de256b103aa01da2b87c7d9cff3fa9.setContent(html_4a40d317392383e4028def669cefd22b);
+            
+        
+
+        circle_marker_60fa3b460bad56e79dec44a1f038a10b.bindPopup(popup_17de256b103aa01da2b87c7d9cff3fa9)
+        ;
+
+        
+    
+    
+            circle_marker_60fa3b460bad56e79dec44a1f038a10b.bindTooltip(
+                `<div>
+                     基隆: AQI 86
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c5082011e92fd777af44eebfd3ad78ea = L.circleMarker(
+                [25.06624, 121.64081],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_00894037789e5d2ae5f8a592172cb5b3 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_db75abf21f47f6c211bd1e35dde51574 = $(`<div id="html_db75abf21f47f6c211bd1e35dde51574" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 汐止<br>                     <b>縣市:</b> 新北市<br>                     <b>AQI:</b> 77                 </div>                 </div>`)[0];
+                popup_00894037789e5d2ae5f8a592172cb5b3.setContent(html_db75abf21f47f6c211bd1e35dde51574);
+            
+        
+
+        circle_marker_c5082011e92fd777af44eebfd3ad78ea.bindPopup(popup_00894037789e5d2ae5f8a592172cb5b3)
+        ;
+
+        
+    
+    
+            circle_marker_c5082011e92fd777af44eebfd3ad78ea.bindTooltip(
+                `<div>
+                     汐止: AQI 77
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_4d014d8a5e307fa54db86a642f2b878c = L.circleMarker(
+                [24.977222, 121.537778],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_222b5904f1fcf86735fdc25426c1bb18 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_88a7982d6fc8cd2d23c3a4996b85858f = $(`<div id="html_88a7982d6fc8cd2d23c3a4996b85858f" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 新店<br>                     <b>縣市:</b> 新北市<br>                     <b>AQI:</b> 73                 </div>                 </div>`)[0];
+                popup_222b5904f1fcf86735fdc25426c1bb18.setContent(html_88a7982d6fc8cd2d23c3a4996b85858f);
+            
+        
+
+        circle_marker_4d014d8a5e307fa54db86a642f2b878c.bindPopup(popup_222b5904f1fcf86735fdc25426c1bb18)
+        ;
+
+        
+    
+    
+            circle_marker_4d014d8a5e307fa54db86a642f2b878c.bindTooltip(
+                `<div>
+                     新店: AQI 73
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b2df594b810a71b35628271cf8b815f9 = L.circleMarker(
+                [24.982528, 121.451861],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_239ffc563d32954dfa6d37bd7d22e249 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_fb9f067d4eedfda98729e794e4366125 = $(`<div id="html_fb9f067d4eedfda98729e794e4366125" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 土城<br>                     <b>縣市:</b> 新北市<br>                     <b>AQI:</b> 75                 </div>                 </div>`)[0];
+                popup_239ffc563d32954dfa6d37bd7d22e249.setContent(html_fb9f067d4eedfda98729e794e4366125);
+            
+        
+
+        circle_marker_b2df594b810a71b35628271cf8b815f9.bindPopup(popup_239ffc563d32954dfa6d37bd7d22e249)
+        ;
+
+        
+    
+    
+            circle_marker_b2df594b810a71b35628271cf8b815f9.bindTooltip(
+                `<div>
+                     土城: AQI 75
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0b431088a434908510283e093d352135 = L.circleMarker(
+                [25.012972, 121.458667],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_22cf54cc4b2530d9c0155885aa2698f9 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_b5be7548a40541ae60aa14b90a7d0596 = $(`<div id="html_b5be7548a40541ae60aa14b90a7d0596" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 板橋<br>                     <b>縣市:</b> 新北市<br>                     <b>AQI:</b> 87                 </div>                 </div>`)[0];
+                popup_22cf54cc4b2530d9c0155885aa2698f9.setContent(html_b5be7548a40541ae60aa14b90a7d0596);
+            
+        
+
+        circle_marker_0b431088a434908510283e093d352135.bindPopup(popup_22cf54cc4b2530d9c0155885aa2698f9)
+        ;
+
+        
+    
+    
+            circle_marker_0b431088a434908510283e093d352135.bindTooltip(
+                `<div>
+                     板橋: AQI 87
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_092b85562888a6b63021b6e33bec68bc = L.circleMarker(
+                [25.037972, 121.4325],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_9c22f7d5111288a3a76032413abc2066 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_03fc15dd008eaa61e48149afb242c362 = $(`<div id="html_03fc15dd008eaa61e48149afb242c362" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 新莊<br>                     <b>縣市:</b> 新北市<br>                     <b>AQI:</b> 87                 </div>                 </div>`)[0];
+                popup_9c22f7d5111288a3a76032413abc2066.setContent(html_03fc15dd008eaa61e48149afb242c362);
+            
+        
+
+        circle_marker_092b85562888a6b63021b6e33bec68bc.bindPopup(popup_9c22f7d5111288a3a76032413abc2066)
+        ;
+
+        
+    
+    
+            circle_marker_092b85562888a6b63021b6e33bec68bc.bindTooltip(
+                `<div>
+                     新莊: AQI 87
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_20a5dccf89c47766940a0821f9377180 = L.circleMarker(
+                [25.06895, 121.481028],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_ce2168184c6d036863e7a0f0292249c1 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_4773c053d9de4e5d7f9e1b2a5aad738e = $(`<div id="html_4773c053d9de4e5d7f9e1b2a5aad738e" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 菜寮<br>                     <b>縣市:</b> 新北市<br>                     <b>AQI:</b> 83                 </div>                 </div>`)[0];
+                popup_ce2168184c6d036863e7a0f0292249c1.setContent(html_4773c053d9de4e5d7f9e1b2a5aad738e);
+            
+        
+
+        circle_marker_20a5dccf89c47766940a0821f9377180.bindPopup(popup_ce2168184c6d036863e7a0f0292249c1)
+        ;
+
+        
+    
+    
+            circle_marker_20a5dccf89c47766940a0821f9377180.bindTooltip(
+                `<div>
+                     菜寮: AQI 83
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ff0f4de22be2aa532138c5aee00bf02a = L.circleMarker(
+                [25.07798949, 121.36548982],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_b7ec0012c4fded68b51754011c6752d3 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_de063001c67c1ffc3460da59a92bc116 = $(`<div id="html_de063001c67c1ffc3460da59a92bc116" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 林口<br>                     <b>縣市:</b> 新北市<br>                     <b>AQI:</b> 71                 </div>                 </div>`)[0];
+                popup_b7ec0012c4fded68b51754011c6752d3.setContent(html_de063001c67c1ffc3460da59a92bc116);
+            
+        
+
+        circle_marker_ff0f4de22be2aa532138c5aee00bf02a.bindPopup(popup_b7ec0012c4fded68b51754011c6752d3)
+        ;
+
+        
+    
+    
+            circle_marker_ff0f4de22be2aa532138c5aee00bf02a.bindTooltip(
+                `<div>
+                     林口: AQI 71
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d2b35c08ce5008468cce32457a62309b = L.circleMarker(
+                [25.1645, 121.449239],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_166763a17e3ef9664a7f1bc6de8219b7 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_e28bd2a7a6d7494fdb65f8e507b222b6 = $(`<div id="html_e28bd2a7a6d7494fdb65f8e507b222b6" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 淡水<br>                     <b>縣市:</b> 新北市<br>                     <b>AQI:</b> 92                 </div>                 </div>`)[0];
+                popup_166763a17e3ef9664a7f1bc6de8219b7.setContent(html_e28bd2a7a6d7494fdb65f8e507b222b6);
+            
+        
+
+        circle_marker_d2b35c08ce5008468cce32457a62309b.bindPopup(popup_166763a17e3ef9664a7f1bc6de8219b7)
+        ;
+
+        
+    
+    
+            circle_marker_d2b35c08ce5008468cce32457a62309b.bindTooltip(
+                `<div>
+                     淡水: AQI 92
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b7ec2b66b111a9f12b3c5d589e3ed578 = L.circleMarker(
+                [25.10334003, 121.51666356],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_c4ef9b66b0f1558312d712be488c32b1 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_302bd6028444d63249f3702bea62c7e3 = $(`<div id="html_302bd6028444d63249f3702bea62c7e3" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 士林<br>                     <b>縣市:</b> 臺北市<br>                     <b>AQI:</b> 78                 </div>                 </div>`)[0];
+                popup_c4ef9b66b0f1558312d712be488c32b1.setContent(html_302bd6028444d63249f3702bea62c7e3);
+            
+        
+
+        circle_marker_b7ec2b66b111a9f12b3c5d589e3ed578.bindPopup(popup_c4ef9b66b0f1558312d712be488c32b1)
+        ;
+
+        
+    
+    
+            circle_marker_b7ec2b66b111a9f12b3c5d589e3ed578.bindTooltip(
+                `<div>
+                     士林: AQI 78
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_7587f15ecb6b8d525f15e3fa3c9601c4 = L.circleMarker(
+                [25.062361, 121.526528],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_62f6ddf215d3633bdec73f58dc42f0fe = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_91e68f9c43fe6996de5ed0a455530665 = $(`<div id="html_91e68f9c43fe6996de5ed0a455530665" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 中山<br>                     <b>縣市:</b> 臺北市<br>                     <b>AQI:</b> 78                 </div>                 </div>`)[0];
+                popup_62f6ddf215d3633bdec73f58dc42f0fe.setContent(html_91e68f9c43fe6996de5ed0a455530665);
+            
+        
+
+        circle_marker_7587f15ecb6b8d525f15e3fa3c9601c4.bindPopup(popup_62f6ddf215d3633bdec73f58dc42f0fe)
+        ;
+
+        
+    
+    
+            circle_marker_7587f15ecb6b8d525f15e3fa3c9601c4.bindTooltip(
+                `<div>
+                     中山: AQI 78
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_cb950166b706fe867bdcc120fc271c82 = L.circleMarker(
+                [25.046503, 121.507972],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_69f9f71e2d3d8affdb69ca1c997fa643 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_3565ae45f15e32a9d3226faa18432c39 = $(`<div id="html_3565ae45f15e32a9d3226faa18432c39" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 萬華<br>                     <b>縣市:</b> 臺北市<br>                     <b>AQI:</b> 73                 </div>                 </div>`)[0];
+                popup_69f9f71e2d3d8affdb69ca1c997fa643.setContent(html_3565ae45f15e32a9d3226faa18432c39);
+            
+        
+
+        circle_marker_cb950166b706fe867bdcc120fc271c82.bindPopup(popup_69f9f71e2d3d8affdb69ca1c997fa643)
+        ;
+
+        
+    
+    
+            circle_marker_cb950166b706fe867bdcc120fc271c82.bindTooltip(
+                `<div>
+                     萬華: AQI 73
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_00748b641114cd0c35bef8fa65d2fe5b = L.circleMarker(
+                [25.020608, 121.529556],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_921f622f713bdfccb7d889975faf925a = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_f8a50ab8f0c6201cb0d7e095cdc34f1d = $(`<div id="html_f8a50ab8f0c6201cb0d7e095cdc34f1d" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 古亭<br>                     <b>縣市:</b> 臺北市<br>                     <b>AQI:</b> 73                 </div>                 </div>`)[0];
+                popup_921f622f713bdfccb7d889975faf925a.setContent(html_f8a50ab8f0c6201cb0d7e095cdc34f1d);
+            
+        
+
+        circle_marker_00748b641114cd0c35bef8fa65d2fe5b.bindPopup(popup_921f622f713bdfccb7d889975faf925a)
+        ;
+
+        
+    
+    
+            circle_marker_00748b641114cd0c35bef8fa65d2fe5b.bindTooltip(
+                `<div>
+                     古亭: AQI 73
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b4b52970a00897de0541b6036e81c465 = L.circleMarker(
+                [25.05, 121.578611],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_65b0b1b66eea1659b691ce5a0ae6276f = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_168f240cc65efaf0e060fa263d395215 = $(`<div id="html_168f240cc65efaf0e060fa263d395215" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 松山<br>                     <b>縣市:</b> 臺北市<br>                     <b>AQI:</b> 81                 </div>                 </div>`)[0];
+                popup_65b0b1b66eea1659b691ce5a0ae6276f.setContent(html_168f240cc65efaf0e060fa263d395215);
+            
+        
+
+        circle_marker_b4b52970a00897de0541b6036e81c465.bindPopup(popup_65b0b1b66eea1659b691ce5a0ae6276f)
+        ;
+
+        
+    
+    
+            circle_marker_b4b52970a00897de0541b6036e81c465.bindTooltip(
+                `<div>
+                     松山: AQI 81
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_dea8db01268e9cc273bf9bb58a3acd9c = L.circleMarker(
+                [25.06331455, 121.51342074],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_2847415166994097a47cc96a8abdaf20 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_4b2e75ccdaa3e7547a9e64e666e80cb1 = $(`<div id="html_4b2e75ccdaa3e7547a9e64e666e80cb1" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 大同<br>                     <b>縣市:</b> 臺北市<br>                     <b>AQI:</b> 82                 </div>                 </div>`)[0];
+                popup_2847415166994097a47cc96a8abdaf20.setContent(html_4b2e75ccdaa3e7547a9e64e666e80cb1);
+            
+        
+
+        circle_marker_dea8db01268e9cc273bf9bb58a3acd9c.bindPopup(popup_2847415166994097a47cc96a8abdaf20)
+        ;
+
+        
+    
+    
+            circle_marker_dea8db01268e9cc273bf9bb58a3acd9c.bindTooltip(
+                `<div>
+                     大同: AQI 82
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_46cafbca4d15ea1ab7641161d205542b = L.circleMarker(
+                [24.9947107, 121.30500531],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_3dc6a779e31ed01e57e27cd28dc2be29 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_b46340b5ad5a5eacb89c460cec0570a9 = $(`<div id="html_b46340b5ad5a5eacb89c460cec0570a9" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 桃園<br>                     <b>縣市:</b> 桃園市<br>                     <b>AQI:</b> 91                 </div>                 </div>`)[0];
+                popup_3dc6a779e31ed01e57e27cd28dc2be29.setContent(html_b46340b5ad5a5eacb89c460cec0570a9);
+            
+        
+
+        circle_marker_46cafbca4d15ea1ab7641161d205542b.bindPopup(popup_3dc6a779e31ed01e57e27cd28dc2be29)
+        ;
+
+        
+    
+    
+            circle_marker_46cafbca4d15ea1ab7641161d205542b.bindTooltip(
+                `<div>
+                     桃園: AQI 91
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_8f37b786a053dbab4f2ec910a1d55760 = L.circleMarker(
+                [25.06100357, 121.20251473],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_7d8ca5dfb0605245f363184da2e00b98 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_91c5f5518ed81bc221683207abcdacc0 = $(`<div id="html_91c5f5518ed81bc221683207abcdacc0" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 大園<br>                     <b>縣市:</b> 桃園市<br>                     <b>AQI:</b> 89                 </div>                 </div>`)[0];
+                popup_7d8ca5dfb0605245f363184da2e00b98.setContent(html_91c5f5518ed81bc221683207abcdacc0);
+            
+        
+
+        circle_marker_8f37b786a053dbab4f2ec910a1d55760.bindPopup(popup_7d8ca5dfb0605245f363184da2e00b98)
+        ;
+
+        
+    
+    
+            circle_marker_8f37b786a053dbab4f2ec910a1d55760.bindTooltip(
+                `<div>
+                     大園: AQI 89
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_de88a610632edb67000102a65470b7f6 = L.circleMarker(
+                [25.03556747, 121.08283092],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_a7547011c12a75fd87112147fbb2b1f8 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_4152f94cc0d365b8df71ccd531867d77 = $(`<div id="html_4152f94cc0d365b8df71ccd531867d77" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 觀音<br>                     <b>縣市:</b> 桃園市<br>                     <b>AQI:</b> 78                 </div>                 </div>`)[0];
+                popup_a7547011c12a75fd87112147fbb2b1f8.setContent(html_4152f94cc0d365b8df71ccd531867d77);
+            
+        
+
+        circle_marker_de88a610632edb67000102a65470b7f6.bindPopup(popup_a7547011c12a75fd87112147fbb2b1f8)
+        ;
+
+        
+    
+    
+            circle_marker_de88a610632edb67000102a65470b7f6.bindTooltip(
+                `<div>
+                     觀音: AQI 78
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_aa49bede6f6cd7195ccd74e586d2352a = L.circleMarker(
+                [24.952786, 121.203986],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_02bb3a832c0548021ee3b3dc7a0ec449 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_6b4b7350b943fc8d342229ff81109ed9 = $(`<div id="html_6b4b7350b943fc8d342229ff81109ed9" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 平鎮<br>                     <b>縣市:</b> 桃園市<br>                     <b>AQI:</b> 96                 </div>                 </div>`)[0];
+                popup_02bb3a832c0548021ee3b3dc7a0ec449.setContent(html_6b4b7350b943fc8d342229ff81109ed9);
+            
+        
+
+        circle_marker_aa49bede6f6cd7195ccd74e586d2352a.bindPopup(popup_02bb3a832c0548021ee3b3dc7a0ec449)
+        ;
+
+        
+    
+    
+            circle_marker_aa49bede6f6cd7195ccd74e586d2352a.bindTooltip(
+                `<div>
+                     平鎮: AQI 96
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ade044488e373c213cf4702444db29f9 = L.circleMarker(
+                [24.86400048, 121.21645772],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_981eb7a5cb76db217f1128582bd42fae = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_540ce39c48c46943af88265fc389d3a1 = $(`<div id="html_540ce39c48c46943af88265fc389d3a1" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 龍潭<br>                     <b>縣市:</b> 桃園市<br>                     <b>AQI:</b> 94                 </div>                 </div>`)[0];
+                popup_981eb7a5cb76db217f1128582bd42fae.setContent(html_540ce39c48c46943af88265fc389d3a1);
+            
+        
+
+        circle_marker_ade044488e373c213cf4702444db29f9.bindPopup(popup_981eb7a5cb76db217f1128582bd42fae)
+        ;
+
+        
+    
+    
+            circle_marker_ade044488e373c213cf4702444db29f9.bindTooltip(
+                `<div>
+                     龍潭: AQI 94
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_6e76154380705785ec480bebc27b3b2b = L.circleMarker(
+                [24.90009696, 121.03886894],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_08efcfa0c5f38a048866a6368ab28ba7 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_e3584fa0bc6709d6c8d291ab025ccdf6 = $(`<div id="html_e3584fa0bc6709d6c8d291ab025ccdf6" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 湖口<br>                     <b>縣市:</b> 新竹縣<br>                     <b>AQI:</b> 80                 </div>                 </div>`)[0];
+                popup_08efcfa0c5f38a048866a6368ab28ba7.setContent(html_e3584fa0bc6709d6c8d291ab025ccdf6);
+            
+        
+
+        circle_marker_6e76154380705785ec480bebc27b3b2b.bindPopup(popup_08efcfa0c5f38a048866a6368ab28ba7)
+        ;
+
+        
+    
+    
+            circle_marker_6e76154380705785ec480bebc27b3b2b.bindTooltip(
+                `<div>
+                     湖口: AQI 80
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_1f17a8ca2d0e57e7a06ab04449a357ba = L.circleMarker(
+                [24.74091408, 121.08895493],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_6a6942c838f5077b5b2a59ca74dc91a5 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_e2dada84b7986da947d301ac070edf47 = $(`<div id="html_e2dada84b7986da947d301ac070edf47" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 竹東<br>                     <b>縣市:</b> 新竹縣<br>                     <b>AQI:</b> 76                 </div>                 </div>`)[0];
+                popup_6a6942c838f5077b5b2a59ca74dc91a5.setContent(html_e2dada84b7986da947d301ac070edf47);
+            
+        
+
+        circle_marker_1f17a8ca2d0e57e7a06ab04449a357ba.bindPopup(popup_6a6942c838f5077b5b2a59ca74dc91a5)
+        ;
+
+        
+    
+    
+            circle_marker_1f17a8ca2d0e57e7a06ab04449a357ba.bindTooltip(
+                `<div>
+                     竹東: AQI 76
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_fd247f598b9eb1e870d82575e3737c31 = L.circleMarker(
+                [24.8056356, 120.97236752],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_78f187ef8bf59a5fab68cba53a41ed00 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_ed697b294156a79ce6449dc4edb00ed2 = $(`<div id="html_ed697b294156a79ce6449dc4edb00ed2" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 新竹<br>                     <b>縣市:</b> 新竹市<br>                     <b>AQI:</b> 77                 </div>                 </div>`)[0];
+                popup_78f187ef8bf59a5fab68cba53a41ed00.setContent(html_ed697b294156a79ce6449dc4edb00ed2);
+            
+        
+
+        circle_marker_fd247f598b9eb1e870d82575e3737c31.bindPopup(popup_78f187ef8bf59a5fab68cba53a41ed00)
+        ;
+
+        
+    
+    
+            circle_marker_fd247f598b9eb1e870d82575e3737c31.bindTooltip(
+                `<div>
+                     新竹: AQI 77
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_73f7a7f2b326ebbf51fcaa9c5747260a = L.circleMarker(
+                [24.69690679, 120.89869286],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_e0dfddf97e614708f4babe193663e7ed = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_8658f0aa62a2bc9d737f5aac6e55e7fa = $(`<div id="html_8658f0aa62a2bc9d737f5aac6e55e7fa" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 頭份<br>                     <b>縣市:</b> 苗栗縣<br>                     <b>AQI:</b> 89                 </div>                 </div>`)[0];
+                popup_e0dfddf97e614708f4babe193663e7ed.setContent(html_8658f0aa62a2bc9d737f5aac6e55e7fa);
+            
+        
+
+        circle_marker_73f7a7f2b326ebbf51fcaa9c5747260a.bindPopup(popup_e0dfddf97e614708f4babe193663e7ed)
+        ;
+
+        
+    
+    
+            circle_marker_73f7a7f2b326ebbf51fcaa9c5747260a.bindTooltip(
+                `<div>
+                     頭份: AQI 89
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_57ab0fef66056eef4c9e80dd9729526e = L.circleMarker(
+                [24.56499183, 120.82011468],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_a2c1ba9ef7d81213914d262d4f117b22 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_e882d153ec5d2d3ef3c0ff08679956d4 = $(`<div id="html_e882d153ec5d2d3ef3c0ff08679956d4" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 苗栗<br>                     <b>縣市:</b> 苗栗縣<br>                     <b>AQI:</b> 78                 </div>                 </div>`)[0];
+                popup_a2c1ba9ef7d81213914d262d4f117b22.setContent(html_e882d153ec5d2d3ef3c0ff08679956d4);
+            
+        
+
+        circle_marker_57ab0fef66056eef4c9e80dd9729526e.bindPopup(popup_a2c1ba9ef7d81213914d262d4f117b22)
+        ;
+
+        
+    
+    
+            circle_marker_57ab0fef66056eef4c9e80dd9729526e.bindTooltip(
+                `<div>
+                     苗栗: AQI 78
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b785dd4723b3e91dfff3ef68339d966b = L.circleMarker(
+                [24.38248443, 120.75956754],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_0e087c171e90202f110bb2d2821f1f47 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_0810c44506b54d67e1d9c2e8cc90a6c7 = $(`<div id="html_0810c44506b54d67e1d9c2e8cc90a6c7" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 三義<br>                     <b>縣市:</b> 苗栗縣<br>                     <b>AQI:</b> 62                 </div>                 </div>`)[0];
+                popup_0e087c171e90202f110bb2d2821f1f47.setContent(html_0810c44506b54d67e1d9c2e8cc90a6c7);
+            
+        
+
+        circle_marker_b785dd4723b3e91dfff3ef68339d966b.bindPopup(popup_0e087c171e90202f110bb2d2821f1f47)
+        ;
+
+        
+    
+    
+            circle_marker_b785dd4723b3e91dfff3ef68339d966b.bindTooltip(
+                `<div>
+                     三義: AQI 62
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_07cfe7eceac6100c3c061166b7935521 = L.circleMarker(
+                [24.25699731, 120.74252414],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_47dc1f30d53b0e9d9718975560338b8f = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_76907cc6d19078be97f3a2d371861723 = $(`<div id="html_76907cc6d19078be97f3a2d371861723" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 豐原<br>                     <b>縣市:</b> 臺中市<br>                     <b>AQI:</b> 71                 </div>                 </div>`)[0];
+                popup_47dc1f30d53b0e9d9718975560338b8f.setContent(html_76907cc6d19078be97f3a2d371861723);
+            
+        
+
+        circle_marker_07cfe7eceac6100c3c061166b7935521.bindPopup(popup_47dc1f30d53b0e9d9718975560338b8f)
+        ;
+
+        
+    
+    
+            circle_marker_07cfe7eceac6100c3c061166b7935521.bindTooltip(
+                `<div>
+                     豐原: AQI 71
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b5e5bc752eb9d6974497e13b64f902a3 = L.circleMarker(
+                [24.225628, 120.568794],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_5357741956d379f16b01abfc4b0482ce = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_d20f3590431b9355f8e00c4419603eb3 = $(`<div id="html_d20f3590431b9355f8e00c4419603eb3" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 沙鹿<br>                     <b>縣市:</b> 臺中市<br>                     <b>AQI:</b> 74                 </div>                 </div>`)[0];
+                popup_5357741956d379f16b01abfc4b0482ce.setContent(html_d20f3590431b9355f8e00c4419603eb3);
+            
+        
+
+        circle_marker_b5e5bc752eb9d6974497e13b64f902a3.bindPopup(popup_5357741956d379f16b01abfc4b0482ce)
+        ;
+
+        
+    
+    
+            circle_marker_b5e5bc752eb9d6974497e13b64f902a3.bindTooltip(
+                `<div>
+                     沙鹿: AQI 74
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_291e7b03fa52035a49d4c58f5deba4f0 = L.circleMarker(
+                [24.09961111, 120.67844444],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_af4fdc649cb8bed337d35195b3e2773c = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_87800a8bd62c00084ba4602947e1c1ab = $(`<div id="html_87800a8bd62c00084ba4602947e1c1ab" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 大里<br>                     <b>縣市:</b> 臺中市<br>                     <b>AQI:</b> 78                 </div>                 </div>`)[0];
+                popup_af4fdc649cb8bed337d35195b3e2773c.setContent(html_87800a8bd62c00084ba4602947e1c1ab);
+            
+        
+
+        circle_marker_291e7b03fa52035a49d4c58f5deba4f0.bindPopup(popup_af4fdc649cb8bed337d35195b3e2773c)
+        ;
+
+        
+    
+    
+            circle_marker_291e7b03fa52035a49d4c58f5deba4f0.bindTooltip(
+                `<div>
+                     大里: AQI 78
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e7335917dd51e025664dbf15b0d876a1 = L.circleMarker(
+                [24.151958, 120.641092],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_71c9442d64e45121605e01b2f68b16dc = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_59822f4e96494888b1e915b694316ad0 = $(`<div id="html_59822f4e96494888b1e915b694316ad0" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 忠明<br>                     <b>縣市:</b> 臺中市<br>                     <b>AQI:</b> 67                 </div>                 </div>`)[0];
+                popup_71c9442d64e45121605e01b2f68b16dc.setContent(html_59822f4e96494888b1e915b694316ad0);
+            
+        
+
+        circle_marker_e7335917dd51e025664dbf15b0d876a1.bindPopup(popup_71c9442d64e45121605e01b2f68b16dc)
+        ;
+
+        
+    
+    
+            circle_marker_e7335917dd51e025664dbf15b0d876a1.bindTooltip(
+                `<div>
+                     忠明: AQI 67
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a353425c92d5f88f48c069b92ac84020 = L.circleMarker(
+                [24.162197, 120.616917],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_bd9e934f8df0e3cbfc3cd6ace4cb1637 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_1e8e01c9f0dba8f940107ea3440a49cb = $(`<div id="html_1e8e01c9f0dba8f940107ea3440a49cb" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 西屯<br>                     <b>縣市:</b> 臺中市<br>                     <b>AQI:</b> 68                 </div>                 </div>`)[0];
+                popup_bd9e934f8df0e3cbfc3cd6ace4cb1637.setContent(html_1e8e01c9f0dba8f940107ea3440a49cb);
+            
+        
+
+        circle_marker_a353425c92d5f88f48c069b92ac84020.bindPopup(popup_bd9e934f8df0e3cbfc3cd6ace4cb1637)
+        ;
+
+        
+    
+    
+            circle_marker_a353425c92d5f88f48c069b92ac84020.bindTooltip(
+                `<div>
+                     西屯: AQI 68
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_53d5e8499b130cf6d72c1a8560544c8e = L.circleMarker(
+                [24.066, 120.541519],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_327361fe4e16e7a0b9b1bfb522d1cd03 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_1389b05e1cc8090ef8071eaf9378fe2c = $(`<div id="html_1389b05e1cc8090ef8071eaf9378fe2c" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 彰化<br>                     <b>縣市:</b> 彰化縣<br>                     <b>AQI:</b> 78                 </div>                 </div>`)[0];
+                popup_327361fe4e16e7a0b9b1bfb522d1cd03.setContent(html_1389b05e1cc8090ef8071eaf9378fe2c);
+            
+        
+
+        circle_marker_53d5e8499b130cf6d72c1a8560544c8e.bindPopup(popup_327361fe4e16e7a0b9b1bfb522d1cd03)
+        ;
+
+        
+    
+    
+            circle_marker_53d5e8499b130cf6d72c1a8560544c8e.bindTooltip(
+                `<div>
+                     彰化: AQI 78
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c2a7140fa6ca981e05f37aa9b443c42c = L.circleMarker(
+                [24.131672, 120.469061],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_5f8e10d66ea13832f124ca70fac50e34 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_4f66ccf7f49975bd95e48720a8a69850 = $(`<div id="html_4f66ccf7f49975bd95e48720a8a69850" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 線西<br>                     <b>縣市:</b> 彰化縣<br>                     <b>AQI:</b> 89                 </div>                 </div>`)[0];
+                popup_5f8e10d66ea13832f124ca70fac50e34.setContent(html_4f66ccf7f49975bd95e48720a8a69850);
+            
+        
+
+        circle_marker_c2a7140fa6ca981e05f37aa9b443c42c.bindPopup(popup_5f8e10d66ea13832f124ca70fac50e34)
+        ;
+
+        
+    
+    
+            circle_marker_c2a7140fa6ca981e05f37aa9b443c42c.bindTooltip(
+                `<div>
+                     線西: AQI 89
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_9d5e50caa1ed6287570537bf8294cc61 = L.circleMarker(
+                [23.925175, 120.409653],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_e5a280d205435596a80614bc9d979727 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_3c480ca62aade5bbd19fe136e0e53815 = $(`<div id="html_3c480ca62aade5bbd19fe136e0e53815" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 二林<br>                     <b>縣市:</b> 彰化縣<br>                     <b>AQI:</b> 99                 </div>                 </div>`)[0];
+                popup_e5a280d205435596a80614bc9d979727.setContent(html_3c480ca62aade5bbd19fe136e0e53815);
+            
+        
+
+        circle_marker_9d5e50caa1ed6287570537bf8294cc61.bindPopup(popup_e5a280d205435596a80614bc9d979727)
+        ;
+
+        
+    
+    
+            circle_marker_9d5e50caa1ed6287570537bf8294cc61.bindTooltip(
+                `<div>
+                     二林: AQI 99
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_1041fca02f7575eb254195d522d8add5 = L.circleMarker(
+                [23.913, 120.685306],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_7f1a5e9172395676e4515984402d0ee5 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_0df82d9e6e0393bd531365dec61a66a1 = $(`<div id="html_0df82d9e6e0393bd531365dec61a66a1" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 南投<br>                     <b>縣市:</b> 南投縣<br>                     <b>AQI:</b> 77                 </div>                 </div>`)[0];
+                popup_7f1a5e9172395676e4515984402d0ee5.setContent(html_0df82d9e6e0393bd531365dec61a66a1);
+            
+        
+
+        circle_marker_1041fca02f7575eb254195d522d8add5.bindPopup(popup_7f1a5e9172395676e4515984402d0ee5)
+        ;
+
+        
+    
+    
+            circle_marker_1041fca02f7575eb254195d522d8add5.bindTooltip(
+                `<div>
+                     南投: AQI 77
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b052cd5c1386d1e3056d35de6bf135a6 = L.circleMarker(
+                [23.711853, 120.544994],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_73163ceced25b999421c58c6e06a56d8 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_05743c1bf1f772883a2a47cee45f95cb = $(`<div id="html_05743c1bf1f772883a2a47cee45f95cb" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 斗六<br>                     <b>縣市:</b> 雲林縣<br>                     <b>AQI:</b> 92                 </div>                 </div>`)[0];
+                popup_73163ceced25b999421c58c6e06a56d8.setContent(html_05743c1bf1f772883a2a47cee45f95cb);
+            
+        
+
+        circle_marker_b052cd5c1386d1e3056d35de6bf135a6.bindPopup(popup_73163ceced25b999421c58c6e06a56d8)
+        ;
+
+        
+    
+    
+            circle_marker_b052cd5c1386d1e3056d35de6bf135a6.bindTooltip(
+                `<div>
+                     斗六: AQI 92
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_dfb0580d559da21ca629304614f5e7c1 = L.circleMarker(
+                [23.757547, 120.348742],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_f88b3dc7b77ed3e3c75c79421cb27a42 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_87da55602619e7cd53bdf686f4928405 = $(`<div id="html_87da55602619e7cd53bdf686f4928405" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 崙背<br>                     <b>縣市:</b> 雲林縣<br>                     <b>AQI:</b> 97                 </div>                 </div>`)[0];
+                popup_f88b3dc7b77ed3e3c75c79421cb27a42.setContent(html_87da55602619e7cd53bdf686f4928405);
+            
+        
+
+        circle_marker_dfb0580d559da21ca629304614f5e7c1.bindPopup(popup_f88b3dc7b77ed3e3c75c79421cb27a42)
+        ;
+
+        
+    
+    
+            circle_marker_dfb0580d559da21ca629304614f5e7c1.bindTooltip(
+                `<div>
+                     崙背: AQI 97
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d85c6b11639ed050b908243890392804 = L.circleMarker(
+                [23.554839, 120.345531],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_9db1eaf5137f218bbd29d55c8d3eab13 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_b72abb0aa73ce092fa85c652fa706fb4 = $(`<div id="html_b72abb0aa73ce092fa85c652fa706fb4" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 新港<br>                     <b>縣市:</b> 嘉義縣<br>                     <b>AQI:</b> 102                 </div>                 </div>`)[0];
+                popup_9db1eaf5137f218bbd29d55c8d3eab13.setContent(html_b72abb0aa73ce092fa85c652fa706fb4);
+            
+        
+
+        circle_marker_d85c6b11639ed050b908243890392804.bindPopup(popup_9db1eaf5137f218bbd29d55c8d3eab13)
+        ;
+
+        
+    
+    
+            circle_marker_d85c6b11639ed050b908243890392804.bindTooltip(
+                `<div>
+                     新港: AQI 102
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_3061fe04069b82da12c99f4bc7330186 = L.circleMarker(
+                [23.46538, 120.2478],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_b0c31a3bbdc0990a6318667d00f61ed0 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_642bd0db324823ca3eb2af1eaedd6632 = $(`<div id="html_642bd0db324823ca3eb2af1eaedd6632" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 朴子<br>                     <b>縣市:</b> 嘉義縣<br>                     <b>AQI:</b> 98                 </div>                 </div>`)[0];
+                popup_b0c31a3bbdc0990a6318667d00f61ed0.setContent(html_642bd0db324823ca3eb2af1eaedd6632);
+            
+        
+
+        circle_marker_3061fe04069b82da12c99f4bc7330186.bindPopup(popup_b0c31a3bbdc0990a6318667d00f61ed0)
+        ;
+
+        
+    
+    
+            circle_marker_3061fe04069b82da12c99f4bc7330186.bindTooltip(
+                `<div>
+                     朴子: AQI 98
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_05a2d915a2b1f26f933328c02b110bf4 = L.circleMarker(
+                [23.702175, 120.19933333],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_8d2b22d49ebbb92abad3991f006432e7 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_7fa4216e6199531b3b303b7115398af8 = $(`<div id="html_7fa4216e6199531b3b303b7115398af8" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 臺西<br>                     <b>縣市:</b> 雲林縣<br>                     <b>AQI:</b> 78                 </div>                 </div>`)[0];
+                popup_8d2b22d49ebbb92abad3991f006432e7.setContent(html_7fa4216e6199531b3b303b7115398af8);
+            
+        
+
+        circle_marker_05a2d915a2b1f26f933328c02b110bf4.bindPopup(popup_8d2b22d49ebbb92abad3991f006432e7)
+        ;
+
+        
+    
+    
+            circle_marker_05a2d915a2b1f26f933328c02b110bf4.bindTooltip(
+                `<div>
+                     臺西: AQI 78
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_56a186dce5b34a7b385501401ffb8f78 = L.circleMarker(
+                [23.46477865, 120.44125148],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_81307601d351b7c6bff8d41a33757271 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_48682836addd5350690caa5994e7574b = $(`<div id="html_48682836addd5350690caa5994e7574b" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 嘉義<br>                     <b>縣市:</b> 嘉義市<br>                     <b>AQI:</b> 99                 </div>                 </div>`)[0];
+                popup_81307601d351b7c6bff8d41a33757271.setContent(html_48682836addd5350690caa5994e7574b);
+            
+        
+
+        circle_marker_56a186dce5b34a7b385501401ffb8f78.bindPopup(popup_81307601d351b7c6bff8d41a33757271)
+        ;
+
+        
+    
+    
+            circle_marker_56a186dce5b34a7b385501401ffb8f78.bindTooltip(
+                `<div>
+                     嘉義: AQI 99
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_fbbd2c1f90a5be7868408aea6ed20e4e = L.circleMarker(
+                [23.305633, 120.31725],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_21f63600076a2d755b481fbb4ae55aa5 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_89f48cf352f5a23bfa1c1ff979376ac9 = $(`<div id="html_89f48cf352f5a23bfa1c1ff979376ac9" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 新營<br>                     <b>縣市:</b> 臺南市<br>                     <b>AQI:</b> 100                 </div>                 </div>`)[0];
+                popup_21f63600076a2d755b481fbb4ae55aa5.setContent(html_89f48cf352f5a23bfa1c1ff979376ac9);
+            
+        
+
+        circle_marker_fbbd2c1f90a5be7868408aea6ed20e4e.bindPopup(popup_21f63600076a2d755b481fbb4ae55aa5)
+        ;
+
+        
+    
+    
+            circle_marker_fbbd2c1f90a5be7868408aea6ed20e4e.bindTooltip(
+                `<div>
+                     新營: AQI 100
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_4c8f99dd01956fff3b569927c630663a = L.circleMarker(
+                [23.11337642, 120.29740529],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_573e377e340599491fcc716f9e39ca04 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_5727978b361bef0014d91db89d1c2d49 = $(`<div id="html_5727978b361bef0014d91db89d1c2d49" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 善化<br>                     <b>縣市:</b> 臺南市<br>                     <b>AQI:</b> 101                 </div>                 </div>`)[0];
+                popup_573e377e340599491fcc716f9e39ca04.setContent(html_5727978b361bef0014d91db89d1c2d49);
+            
+        
+
+        circle_marker_4c8f99dd01956fff3b569927c630663a.bindPopup(popup_573e377e340599491fcc716f9e39ca04)
+        ;
+
+        
+    
+    
+            circle_marker_4c8f99dd01956fff3b569927c630663a.bindTooltip(
+                `<div>
+                     善化: AQI 101
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_aaf5829e7c3bab5636ac02a279525991 = L.circleMarker(
+                [23.048197, 120.2175],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_c213e237d032fa8dbcaffdc3daeaaf0b = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_216f690139526d31c0d6a0a5802163dd = $(`<div id="html_216f690139526d31c0d6a0a5802163dd" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 安南<br>                     <b>縣市:</b> 臺南市<br>                     <b>AQI:</b> 106                 </div>                 </div>`)[0];
+                popup_c213e237d032fa8dbcaffdc3daeaaf0b.setContent(html_216f690139526d31c0d6a0a5802163dd);
+            
+        
+
+        circle_marker_aaf5829e7c3bab5636ac02a279525991.bindPopup(popup_c213e237d032fa8dbcaffdc3daeaaf0b)
+        ;
+
+        
+    
+    
+            circle_marker_aaf5829e7c3bab5636ac02a279525991.bindTooltip(
+                `<div>
+                     安南: AQI 106
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e699aeb7b78048f30cd1303c40f4d42d = L.circleMarker(
+                [22.98928311, 120.21947897],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_299f96fb6145a46639f7a5e5bcf03716 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_4538525ef5d21570ce70e112dfb19c7b = $(`<div id="html_4538525ef5d21570ce70e112dfb19c7b" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 臺南<br>                     <b>縣市:</b> 臺南市<br>                     <b>AQI:</b> 101                 </div>                 </div>`)[0];
+                popup_299f96fb6145a46639f7a5e5bcf03716.setContent(html_4538525ef5d21570ce70e112dfb19c7b);
+            
+        
+
+        circle_marker_e699aeb7b78048f30cd1303c40f4d42d.bindPopup(popup_299f96fb6145a46639f7a5e5bcf03716)
+        ;
+
+        
+    
+    
+            circle_marker_e699aeb7b78048f30cd1303c40f4d42d.bindTooltip(
+                `<div>
+                     臺南: AQI 101
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2520937e7440a76f3d8586be63b91641 = L.circleMarker(
+                [22.883583, 120.530542],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_2ac0feb61af5a89826b46898f169f9a6 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_fff0ecb612fd1e68388c88d1b8ccc6f3 = $(`<div id="html_fff0ecb612fd1e68388c88d1b8ccc6f3" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 美濃<br>                     <b>縣市:</b> 高雄市<br>                     <b>AQI:</b> 86                 </div>                 </div>`)[0];
+                popup_2ac0feb61af5a89826b46898f169f9a6.setContent(html_fff0ecb612fd1e68388c88d1b8ccc6f3);
+            
+        
+
+        circle_marker_2520937e7440a76f3d8586be63b91641.bindPopup(popup_2ac0feb61af5a89826b46898f169f9a6)
+        ;
+
+        
+    
+    
+            circle_marker_2520937e7440a76f3d8586be63b91641.bindTooltip(
+                `<div>
+                     美濃: AQI 86
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_7b5985f51c018b87124ee9de391ed037 = L.circleMarker(
+                [22.757506, 120.305689],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_0ee885dd48f26852bfe9ecce772a1c38 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_1346659333e62ed9c0bafab77472991e = $(`<div id="html_1346659333e62ed9c0bafab77472991e" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 橋頭<br>                     <b>縣市:</b> 高雄市<br>                     <b>AQI:</b> 91                 </div>                 </div>`)[0];
+                popup_0ee885dd48f26852bfe9ecce772a1c38.setContent(html_1346659333e62ed9c0bafab77472991e);
+            
+        
+
+        circle_marker_7b5985f51c018b87124ee9de391ed037.bindPopup(popup_0ee885dd48f26852bfe9ecce772a1c38)
+        ;
+
+        
+    
+    
+            circle_marker_7b5985f51c018b87124ee9de391ed037.bindTooltip(
+                `<div>
+                     橋頭: AQI 91
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_001a30cdf80b98902506b945313ead7b = L.circleMarker(
+                [22.689056, 120.332631],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_ed1c54bffe18fe1e6c581c191cd41770 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_50b1b3ffc3b824a9ad32d5ce31a564d9 = $(`<div id="html_50b1b3ffc3b824a9ad32d5ce31a564d9" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 仁武<br>                     <b>縣市:</b> 高雄市<br>                     <b>AQI:</b> 94                 </div>                 </div>`)[0];
+                popup_ed1c54bffe18fe1e6c581c191cd41770.setContent(html_50b1b3ffc3b824a9ad32d5ce31a564d9);
+            
+        
+
+        circle_marker_001a30cdf80b98902506b945313ead7b.bindPopup(popup_ed1c54bffe18fe1e6c581c191cd41770)
+        ;
+
+        
+    
+    
+            circle_marker_001a30cdf80b98902506b945313ead7b.bindTooltip(
+                `<div>
+                     仁武: AQI 94
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d6d14b481f926cfffd2f3a95c60a15d8 = L.circleMarker(
+                [22.628126, 120.357422],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_12562a29485b1ddd3b073ecca8667c37 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_44a22739fd051d5d7730b7f9748c0daa = $(`<div id="html_44a22739fd051d5d7730b7f9748c0daa" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 鳳山<br>                     <b>縣市:</b> 高雄市<br>                     <b>AQI:</b> 84                 </div>                 </div>`)[0];
+                popup_12562a29485b1ddd3b073ecca8667c37.setContent(html_44a22739fd051d5d7730b7f9748c0daa);
+            
+        
+
+        circle_marker_d6d14b481f926cfffd2f3a95c60a15d8.bindPopup(popup_12562a29485b1ddd3b073ecca8667c37)
+        ;
+
+        
+    
+    
+            circle_marker_d6d14b481f926cfffd2f3a95c60a15d8.bindTooltip(
+                `<div>
+                     鳳山: AQI 84
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_11307d1e24628d145329d5c288e3f57e = L.circleMarker(
+                [22.56413611, 120.425311],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_16175b682ca03444049efdd92d30d729 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_a4d48eb3af379eb7b0913d6f9ecee4ac = $(`<div id="html_a4d48eb3af379eb7b0913d6f9ecee4ac" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 大寮<br>                     <b>縣市:</b> 高雄市<br>                     <b>AQI:</b> 84                 </div>                 </div>`)[0];
+                popup_16175b682ca03444049efdd92d30d729.setContent(html_a4d48eb3af379eb7b0913d6f9ecee4ac);
+            
+        
+
+        circle_marker_11307d1e24628d145329d5c288e3f57e.bindPopup(popup_16175b682ca03444049efdd92d30d729)
+        ;
+
+        
+    
+    
+            circle_marker_11307d1e24628d145329d5c288e3f57e.bindTooltip(
+                `<div>
+                     大寮: AQI 84
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_540c3fee8c54be69dd9c56e416415026 = L.circleMarker(
+                [22.4795, 120.41175],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_a8dbf21416119c2672ed7869f4a12cfd = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_634f804683d57c8b0a3058baac15a264 = $(`<div id="html_634f804683d57c8b0a3058baac15a264" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 林園<br>                     <b>縣市:</b> 高雄市<br>                     <b>AQI:</b> 72                 </div>                 </div>`)[0];
+                popup_a8dbf21416119c2672ed7869f4a12cfd.setContent(html_634f804683d57c8b0a3058baac15a264);
+            
+        
+
+        circle_marker_540c3fee8c54be69dd9c56e416415026.bindPopup(popup_a8dbf21416119c2672ed7869f4a12cfd)
+        ;
+
+        
+    
+    
+            circle_marker_540c3fee8c54be69dd9c56e416415026.bindTooltip(
+                `<div>
+                     林園: AQI 72
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_cdf6c60abcf20a892fe9c3d8d5c652c4 = L.circleMarker(
+                [22.733667, 120.328289],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_287e90e9ce3beb1b678926a3d36aed64 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_0e46a430a2df2092dc4fde21a8d28f4c = $(`<div id="html_0e46a430a2df2092dc4fde21a8d28f4c" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 楠梓<br>                     <b>縣市:</b> 高雄市<br>                     <b>AQI:</b> 91                 </div>                 </div>`)[0];
+                popup_287e90e9ce3beb1b678926a3d36aed64.setContent(html_0e46a430a2df2092dc4fde21a8d28f4c);
+            
+        
+
+        circle_marker_cdf6c60abcf20a892fe9c3d8d5c652c4.bindPopup(popup_287e90e9ce3beb1b678926a3d36aed64)
+        ;
+
+        
+    
+    
+            circle_marker_cdf6c60abcf20a892fe9c3d8d5c652c4.bindTooltip(
+                `<div>
+                     楠梓: AQI 91
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_068459d9195288f7c4b83d57a2dc5b2b = L.circleMarker(
+                [22.674861, 120.292917],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_12362670a75dcc72ca533f0a18c56829 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_9c834f13b0be28f91d6ae0111f2f25a6 = $(`<div id="html_9c834f13b0be28f91d6ae0111f2f25a6" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 左營<br>                     <b>縣市:</b> 高雄市<br>                     <b>AQI:</b> 87                 </div>                 </div>`)[0];
+                popup_12362670a75dcc72ca533f0a18c56829.setContent(html_9c834f13b0be28f91d6ae0111f2f25a6);
+            
+        
+
+        circle_marker_068459d9195288f7c4b83d57a2dc5b2b.bindPopup(popup_12362670a75dcc72ca533f0a18c56829)
+        ;
+
+        
+    
+    
+            circle_marker_068459d9195288f7c4b83d57a2dc5b2b.bindTooltip(
+                `<div>
+                     左營: AQI 87
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0889eda71f266fc414ab178034c6f292 = L.circleMarker(
+                [22.63390278, 120.28676111],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_aa32b33aa7b474631a214e1b1273c7f9 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_93b9000d3d6b928d2c1b34d6e8b982cf = $(`<div id="html_93b9000d3d6b928d2c1b34d6e8b982cf" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 前金<br>                     <b>縣市:</b> 高雄市<br>                     <b>AQI:</b> 89                 </div>                 </div>`)[0];
+                popup_aa32b33aa7b474631a214e1b1273c7f9.setContent(html_93b9000d3d6b928d2c1b34d6e8b982cf);
+            
+        
+
+        circle_marker_0889eda71f266fc414ab178034c6f292.bindPopup(popup_aa32b33aa7b474631a214e1b1273c7f9)
+        ;
+
+        
+    
+    
+            circle_marker_0889eda71f266fc414ab178034c6f292.bindTooltip(
+                `<div>
+                     前金: AQI 89
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c6424ab2694b4464f4bba6b3c7b428d4 = L.circleMarker(
+                [22.6044507, 120.30833356],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_19910df4ce067c65f85fed1af23e912a = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_e94fe58e7907f87a7910a339b942e087 = $(`<div id="html_e94fe58e7907f87a7910a339b942e087" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 前鎮<br>                     <b>縣市:</b> 高雄市<br>                     <b>AQI:</b> 80                 </div>                 </div>`)[0];
+                popup_19910df4ce067c65f85fed1af23e912a.setContent(html_e94fe58e7907f87a7910a339b942e087);
+            
+        
+
+        circle_marker_c6424ab2694b4464f4bba6b3c7b428d4.bindPopup(popup_19910df4ce067c65f85fed1af23e912a)
+        ;
+
+        
+    
+    
+            circle_marker_c6424ab2694b4464f4bba6b3c7b428d4.bindTooltip(
+                `<div>
+                     前鎮: AQI 80
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_79c5afafa41e460663d6845e64feca00 = L.circleMarker(
+                [22.565833, 120.337736],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_8113ffdaf2ec18d90b8379d58f6b6d4b = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_a164f000c881fb83890ba13568164375 = $(`<div id="html_a164f000c881fb83890ba13568164375" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 小港<br>                     <b>縣市:</b> 高雄市<br>                     <b>AQI:</b> 80                 </div>                 </div>`)[0];
+                popup_8113ffdaf2ec18d90b8379d58f6b6d4b.setContent(html_a164f000c881fb83890ba13568164375);
+            
+        
+
+        circle_marker_79c5afafa41e460663d6845e64feca00.bindPopup(popup_8113ffdaf2ec18d90b8379d58f6b6d4b)
+        ;
+
+        
+    
+    
+            circle_marker_79c5afafa41e460663d6845e64feca00.bindTooltip(
+                `<div>
+                     小港: AQI 80
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_9b5852d78e46b73df47c08367e0e6923 = L.circleMarker(
+                [22.673081, 120.488033],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_b1917d5715c5d782b4ad5fa6762bc67e = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_27a94d3a673cfe4ed2d0f17cd0215183 = $(`<div id="html_27a94d3a673cfe4ed2d0f17cd0215183" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 屏東<br>                     <b>縣市:</b> 屏東縣<br>                     <b>AQI:</b> 83                 </div>                 </div>`)[0];
+                popup_b1917d5715c5d782b4ad5fa6762bc67e.setContent(html_27a94d3a673cfe4ed2d0f17cd0215183);
+            
+        
+
+        circle_marker_9b5852d78e46b73df47c08367e0e6923.bindPopup(popup_b1917d5715c5d782b4ad5fa6762bc67e)
+        ;
+
+        
+    
+    
+            circle_marker_9b5852d78e46b73df47c08367e0e6923.bindTooltip(
+                `<div>
+                     屏東: AQI 83
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_3f0bbbbb35b75cd5477ed045c7ec3cf4 = L.circleMarker(
+                [22.523108, 120.561175],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_b142269628101085d084f5e791e66bed = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_ae819124859415f284906291a366228b = $(`<div id="html_ae819124859415f284906291a366228b" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 潮州<br>                     <b>縣市:</b> 屏東縣<br>                     <b>AQI:</b> 72                 </div>                 </div>`)[0];
+                popup_b142269628101085d084f5e791e66bed.setContent(html_ae819124859415f284906291a366228b);
+            
+        
+
+        circle_marker_3f0bbbbb35b75cd5477ed045c7ec3cf4.bindPopup(popup_b142269628101085d084f5e791e66bed)
+        ;
+
+        
+    
+    
+            circle_marker_3f0bbbbb35b75cd5477ed045c7ec3cf4.bindTooltip(
+                `<div>
+                     潮州: AQI 72
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ad8a1a21fe64dbeaefc2de523793f6a5 = L.circleMarker(
+                [21.958069, 120.788928],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_b5b2d8bf8fd60bf5da2254f816f35098 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_29ff372f5cefc76932ebc4d704e9c6f2 = $(`<div id="html_29ff372f5cefc76932ebc4d704e9c6f2" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 恆春<br>                     <b>縣市:</b> 屏東縣<br>                     <b>AQI:</b> 30                 </div>                 </div>`)[0];
+                popup_b5b2d8bf8fd60bf5da2254f816f35098.setContent(html_29ff372f5cefc76932ebc4d704e9c6f2);
+            
+        
+
+        circle_marker_ad8a1a21fe64dbeaefc2de523793f6a5.bindPopup(popup_b5b2d8bf8fd60bf5da2254f816f35098)
+        ;
+
+        
+    
+    
+            circle_marker_ad8a1a21fe64dbeaefc2de523793f6a5.bindTooltip(
+                `<div>
+                     恆春: AQI 30
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f4d6e6007d0b4de0966f5dff3219151a = L.circleMarker(
+                [22.755358, 121.15045],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_81b0dadb046c6b3e2665920966cb0305 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_71fac1d40f0dbe8fe9a7049016f9fbc1 = $(`<div id="html_71fac1d40f0dbe8fe9a7049016f9fbc1" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 臺東<br>                     <b>縣市:</b> 臺東縣<br>                     <b>AQI:</b> 37                 </div>                 </div>`)[0];
+                popup_81b0dadb046c6b3e2665920966cb0305.setContent(html_71fac1d40f0dbe8fe9a7049016f9fbc1);
+            
+        
+
+        circle_marker_f4d6e6007d0b4de0966f5dff3219151a.bindPopup(popup_81b0dadb046c6b3e2665920966cb0305)
+        ;
+
+        
+    
+    
+            circle_marker_f4d6e6007d0b4de0966f5dff3219151a.bindTooltip(
+                `<div>
+                     臺東: AQI 37
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_5ce8b931e841301f96cc4dead68ae07a = L.circleMarker(
+                [23.971306, 121.599769],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_8fa7f2a542615088198521a43e1932e3 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_22d4f3b1e1cac6d2940840e024e65835 = $(`<div id="html_22d4f3b1e1cac6d2940840e024e65835" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 花蓮<br>                     <b>縣市:</b> 花蓮縣<br>                     <b>AQI:</b> 38                 </div>                 </div>`)[0];
+                popup_8fa7f2a542615088198521a43e1932e3.setContent(html_22d4f3b1e1cac6d2940840e024e65835);
+            
+        
+
+        circle_marker_5ce8b931e841301f96cc4dead68ae07a.bindPopup(popup_8fa7f2a542615088198521a43e1932e3)
+        ;
+
+        
+    
+    
+            circle_marker_5ce8b931e841301f96cc4dead68ae07a.bindTooltip(
+                `<div>
+                     花蓮: AQI 38
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_3e05b651dcd44179f2c486515e7fbaab = L.circleMarker(
+                [25.182722, 121.529583],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_f2327f318b244e89f584681731630eb0 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_f7ca3b458a624fab733af54bac808288 = $(`<div id="html_f7ca3b458a624fab733af54bac808288" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 陽明<br>                     <b>縣市:</b> 臺北市<br>                     <b>AQI:</b> 41                 </div>                 </div>`)[0];
+                popup_f2327f318b244e89f584681731630eb0.setContent(html_f7ca3b458a624fab733af54bac808288);
+            
+        
+
+        circle_marker_3e05b651dcd44179f2c486515e7fbaab.bindPopup(popup_f2327f318b244e89f584681731630eb0)
+        ;
+
+        
+    
+    
+            circle_marker_3e05b651dcd44179f2c486515e7fbaab.bindTooltip(
+                `<div>
+                     陽明: AQI 41
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c7f8a3c63a8737644a73e5ecaa5e1972 = L.circleMarker(
+                [24.747917, 121.746394],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_61127732bbe7fcbc0e33b4b4c2547033 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_1398082f19ecf8ea833edd215b9ecb01 = $(`<div id="html_1398082f19ecf8ea833edd215b9ecb01" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 宜蘭<br>                     <b>縣市:</b> 宜蘭縣<br>                     <b>AQI:</b> 49                 </div>                 </div>`)[0];
+                popup_61127732bbe7fcbc0e33b4b4c2547033.setContent(html_1398082f19ecf8ea833edd215b9ecb01);
+            
+        
+
+        circle_marker_c7f8a3c63a8737644a73e5ecaa5e1972.bindPopup(popup_61127732bbe7fcbc0e33b4b4c2547033)
+        ;
+
+        
+    
+    
+            circle_marker_c7f8a3c63a8737644a73e5ecaa5e1972.bindTooltip(
+                `<div>
+                     宜蘭: AQI 49
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_8a6265a5d4ffc4ebf80301e2d564fa95 = L.circleMarker(
+                [24.632203, 121.792928],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_52970f0e0b3567d19f6126ca29afc1df = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_8e8ad254e8007966cec251bc6819bccc = $(`<div id="html_8e8ad254e8007966cec251bc6819bccc" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 冬山<br>                     <b>縣市:</b> 宜蘭縣<br>                     <b>AQI:</b> 54                 </div>                 </div>`)[0];
+                popup_52970f0e0b3567d19f6126ca29afc1df.setContent(html_8e8ad254e8007966cec251bc6819bccc);
+            
+        
+
+        circle_marker_8a6265a5d4ffc4ebf80301e2d564fa95.bindPopup(popup_52970f0e0b3567d19f6126ca29afc1df)
+        ;
+
+        
+    
+    
+            circle_marker_8a6265a5d4ffc4ebf80301e2d564fa95.bindTooltip(
+                `<div>
+                     冬山: AQI 54
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_9b56aacc6de59dd3eb3a0bb6b9c8f54e = L.circleMarker(
+                [25.072611, 121.493806],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_0384c6cd76476254bfd57b9aacf0f969 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_e2195bf9ba7e6af577f5a7b9cb03a669 = $(`<div id="html_e2195bf9ba7e6af577f5a7b9cb03a669" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 三重<br>                     <b>縣市:</b> 新北市<br>                     <b>AQI:</b> 84                 </div>                 </div>`)[0];
+                popup_0384c6cd76476254bfd57b9aacf0f969.setContent(html_e2195bf9ba7e6af577f5a7b9cb03a669);
+            
+        
+
+        circle_marker_9b56aacc6de59dd3eb3a0bb6b9c8f54e.bindPopup(popup_0384c6cd76476254bfd57b9aacf0f969)
+        ;
+
+        
+    
+    
+            circle_marker_9b56aacc6de59dd3eb3a0bb6b9c8f54e.bindTooltip(
+                `<div>
+                     三重: AQI 84
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c44f59db04ca4ee69205572bb5990de7 = L.circleMarker(
+                [24.953278, 121.221667],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_4cf6757c04e28f26ca573cf5c7adba14 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_8a1696750ed3447d124cc1c286ec3023 = $(`<div id="html_8a1696750ed3447d124cc1c286ec3023" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 中壢<br>                     <b>縣市:</b> 桃園市<br>                     <b>AQI:</b> 93                 </div>                 </div>`)[0];
+                popup_4cf6757c04e28f26ca573cf5c7adba14.setContent(html_8a1696750ed3447d124cc1c286ec3023);
+            
+        
+
+        circle_marker_c44f59db04ca4ee69205572bb5990de7.bindPopup(popup_4cf6757c04e28f26ca573cf5c7adba14)
+        ;
+
+        
+    
+    
+            circle_marker_c44f59db04ca4ee69205572bb5990de7.bindTooltip(
+                `<div>
+                     中壢: AQI 93
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_94feccf9a44b07f4871be9c3925e40c4 = L.circleMarker(
+                [23.756389, 120.677306],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_0b25fc7a5bf66948b0e96383bad3d5d9 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_97974c4c4805229032bda35a7f0933cc = $(`<div id="html_97974c4c4805229032bda35a7f0933cc" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 竹山<br>                     <b>縣市:</b> 南投縣<br>                     <b>AQI:</b> 81                 </div>                 </div>`)[0];
+                popup_0b25fc7a5bf66948b0e96383bad3d5d9.setContent(html_97974c4c4805229032bda35a7f0933cc);
+            
+        
+
+        circle_marker_94feccf9a44b07f4871be9c3925e40c4.bindPopup(popup_0b25fc7a5bf66948b0e96383bad3d5d9)
+        ;
+
+        
+    
+    
+            circle_marker_94feccf9a44b07f4871be9c3925e40c4.bindTooltip(
+                `<div>
+                     竹山: AQI 81
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_fc467c4570f24fa916f665beafe1c068 = L.circleMarker(
+                [25.017, 121.516306],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_1b3f3a92860864e33b1c86168bdde113 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_f5ce1e1f30f7f537b14a9d2979e86429 = $(`<div id="html_f5ce1e1f30f7f537b14a9d2979e86429" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 永和<br>                     <b>縣市:</b> 新北市<br>                     <b>AQI:</b> 83                 </div>                 </div>`)[0];
+                popup_1b3f3a92860864e33b1c86168bdde113.setContent(html_f5ce1e1f30f7f537b14a9d2979e86429);
+            
+        
+
+        circle_marker_fc467c4570f24fa916f665beafe1c068.bindPopup(popup_1b3f3a92860864e33b1c86168bdde113)
+        ;
+
+        
+    
+    
+            circle_marker_fc467c4570f24fa916f665beafe1c068.bindTooltip(
+                `<div>
+                     永和: AQI 83
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_92f8a361044acf2fcfee7b6d4b8b419a = L.circleMarker(
+                [22.608711, 120.312017],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_2dabcdc17c1c972ed9829522850a5589 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_7cfc0a0f31596501a5dab0fbfbe708dd = $(`<div id="html_7cfc0a0f31596501a5dab0fbfbe708dd" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 復興<br>                     <b>縣市:</b> 高雄市<br>                     <b>AQI:</b> 80                 </div>                 </div>`)[0];
+                popup_2dabcdc17c1c972ed9829522850a5589.setContent(html_7cfc0a0f31596501a5dab0fbfbe708dd);
+            
+        
+
+        circle_marker_92f8a361044acf2fcfee7b6d4b8b419a.bindPopup(popup_2dabcdc17c1c972ed9829522850a5589)
+        ;
+
+        
+    
+    
+            circle_marker_92f8a361044acf2fcfee7b6d4b8b419a.bindTooltip(
+                `<div>
+                     復興: AQI 80
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f9dd57f8248668154d76ddf7bab213ed = L.circleMarker(
+                [23.968842, 120.967903],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_e1e0900b4d542224fcc7125db1afa791 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_1ce86c9cc580c258680305453f8d38c0 = $(`<div id="html_1ce86c9cc580c258680305453f8d38c0" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 埔里<br>                     <b>縣市:</b> 南投縣<br>                     <b>AQI:</b> 70                 </div>                 </div>`)[0];
+                popup_e1e0900b4d542224fcc7125db1afa791.setContent(html_1ce86c9cc580c258680305453f8d38c0);
+            
+        
+
+        circle_marker_f9dd57f8248668154d76ddf7bab213ed.bindPopup(popup_e1e0900b4d542224fcc7125db1afa791)
+        ;
+
+        
+    
+    
+            circle_marker_f9dd57f8248668154d76ddf7bab213ed.bindTooltip(
+                `<div>
+                     埔里: AQI 70
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_15b26d72500986f832998196ff6de99c = L.circleMarker(
+                [26.153736, 119.952724],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_95b0c5be5970ae3002084443bb15f467 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_db4eb9d99920ada0f3f544c688f1b5c3 = $(`<div id="html_db4eb9d99920ada0f3f544c688f1b5c3" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 馬祖<br>                     <b>縣市:</b> 連江縣<br>                     <b>AQI:</b> 108                 </div>                 </div>`)[0];
+                popup_95b0c5be5970ae3002084443bb15f467.setContent(html_db4eb9d99920ada0f3f544c688f1b5c3);
+            
+        
+
+        circle_marker_15b26d72500986f832998196ff6de99c.bindPopup(popup_95b0c5be5970ae3002084443bb15f467)
+        ;
+
+        
+    
+    
+            circle_marker_15b26d72500986f832998196ff6de99c.bindTooltip(
+                `<div>
+                     馬祖: AQI 108
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_3d6218d987c484eae284a914cee8f6b8 = L.circleMarker(
+                [24.432133, 118.312256],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_34c3dedbb3dd563370434674dcc2965f = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_b60b48a3793372f909e7274abaab4f30 = $(`<div id="html_b60b48a3793372f909e7274abaab4f30" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 金門<br>                     <b>縣市:</b> 金門縣<br>                     <b>AQI:</b> 95                 </div>                 </div>`)[0];
+                popup_34c3dedbb3dd563370434674dcc2965f.setContent(html_b60b48a3793372f909e7274abaab4f30);
+            
+        
+
+        circle_marker_3d6218d987c484eae284a914cee8f6b8.bindPopup(popup_34c3dedbb3dd563370434674dcc2965f)
+        ;
+
+        
+    
+    
+            circle_marker_3d6218d987c484eae284a914cee8f6b8.bindTooltip(
+                `<div>
+                     金門: AQI 95
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_bc5c5781cd6d7c9927f05ade624d36b4 = L.circleMarker(
+                [23.569031, 119.566158],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_809aa37ea8b6a154c3c730b746a278bb = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_d835fb7f41daa97369ba267088a59896 = $(`<div id="html_d835fb7f41daa97369ba267088a59896" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 馬公<br>                     <b>縣市:</b> 澎湖縣<br>                     <b>AQI:</b> 72                 </div>                 </div>`)[0];
+                popup_809aa37ea8b6a154c3c730b746a278bb.setContent(html_d835fb7f41daa97369ba267088a59896);
+            
+        
+
+        circle_marker_bc5c5781cd6d7c9927f05ade624d36b4.bindPopup(popup_809aa37ea8b6a154c3c730b746a278bb)
+        ;
+
+        
+    
+    
+            circle_marker_bc5c5781cd6d7c9927f05ade624d36b4.bindTooltip(
+                `<div>
+                     馬公: AQI 72
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_697fbff40a0369a85635e73524e2f1ae = L.circleMarker(
+                [23.045083, 121.161933],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_d33682fbef34bdae1ddf3de3785b83ed = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_1f4bf2abed495834ad82e6ddfad5d059 = $(`<div id="html_1f4bf2abed495834ad82e6ddfad5d059" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 關山<br>                     <b>縣市:</b> 臺東縣<br>                     <b>AQI:</b> 28                 </div>                 </div>`)[0];
+                popup_d33682fbef34bdae1ddf3de3785b83ed.setContent(html_1f4bf2abed495834ad82e6ddfad5d059);
+            
+        
+
+        circle_marker_697fbff40a0369a85635e73524e2f1ae.bindPopup(popup_d33682fbef34bdae1ddf3de3785b83ed)
+        ;
+
+        
+    
+    
+            circle_marker_697fbff40a0369a85635e73524e2f1ae.bindTooltip(
+                `<div>
+                     關山: AQI 28
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_9f73a62b6ff0811227ca8329772b4e57 = L.circleMarker(
+                [23.753506, 120.251825],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_ccd33e7037d296655e79c9e3af788ea9 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_8268ba23ec4ab9cfa497703a31350c10 = $(`<div id="html_8268ba23ec4ab9cfa497703a31350c10" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 麥寮<br>                     <b>縣市:</b> 雲林縣<br>                     <b>AQI:</b> 89                 </div>                 </div>`)[0];
+                popup_ccd33e7037d296655e79c9e3af788ea9.setContent(html_8268ba23ec4ab9cfa497703a31350c10);
+            
+        
+
+        circle_marker_9f73a62b6ff0811227ca8329772b4e57.bindPopup(popup_ccd33e7037d296655e79c9e3af788ea9)
+        ;
+
+        
+    
+    
+            circle_marker_9f73a62b6ff0811227ca8329772b4e57.bindTooltip(
+                `<div>
+                     麥寮: AQI 89
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a11ca1a9c4d7faa8c8cfb3b5c4f040a9 = L.circleMarker(
+                [25.29681695, 121.53656894],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_88361f16946fc145e58949482e8d0154 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_7eef3531cbc45845508ae53e99c4635e = $(`<div id="html_7eef3531cbc45845508ae53e99c4635e" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 富貴角<br>                     <b>縣市:</b> 新北市<br>                     <b>AQI:</b> 103                 </div>                 </div>`)[0];
+                popup_88361f16946fc145e58949482e8d0154.setContent(html_7eef3531cbc45845508ae53e99c4635e);
+            
+        
+
+        circle_marker_a11ca1a9c4d7faa8c8cfb3b5c4f040a9.bindPopup(popup_88361f16946fc145e58949482e8d0154)
+        ;
+
+        
+    
+    
+            circle_marker_a11ca1a9c4d7faa8c8cfb3b5c4f040a9.bindTooltip(
+                `<div>
+                     富貴角: AQI 103
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_744ea30efcdc9a57f8952bf72d186f54 = L.circleMarker(
+                [23.85493056, 120.26964167],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_a2fed3b2ef3237ccfc368bfcb8190b3e = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_d1ac1f395e87f4be4eb7800ef9df7973 = $(`<div id="html_d1ac1f395e87f4be4eb7800ef9df7973" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 大城<br>                     <b>縣市:</b> 彰化縣<br>                     <b>AQI:</b> 75                 </div>                 </div>`)[0];
+                popup_a2fed3b2ef3237ccfc368bfcb8190b3e.setContent(html_d1ac1f395e87f4be4eb7800ef9df7973);
+            
+        
+
+        circle_marker_744ea30efcdc9a57f8952bf72d186f54.bindPopup(popup_a2fed3b2ef3237ccfc368bfcb8190b3e)
+        ;
+
+        
+    
+    
+            circle_marker_744ea30efcdc9a57f8952bf72d186f54.bindTooltip(
+                `<div>
+                     大城: AQI 75
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_7ecfc66ecfa0d973ce3d9136f6dd94b4 = L.circleMarker(
+                [24.1589, 120.6567111],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_f03ad7a3a8fb5b68f3a6568d39726662 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_ec02f6d0c8e0a90cbf83bb550d4bccf3 = $(`<div id="html_ec02f6d0c8e0a90cbf83bb550d4bccf3" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 臺灣大道<br>                     <b>縣市:</b> 臺中市<br>                     <b>AQI:</b> 75                 </div>                 </div>`)[0];
+                popup_f03ad7a3a8fb5b68f3a6568d39726662.setContent(html_ec02f6d0c8e0a90cbf83bb550d4bccf3);
+            
+        
+
+        circle_marker_7ecfc66ecfa0d973ce3d9136f6dd94b4.bindPopup(popup_f03ad7a3a8fb5b68f3a6568d39726662)
+        ;
+
+        
+    
+    
+            circle_marker_7ecfc66ecfa0d973ce3d9136f6dd94b4.bindTooltip(
+                `<div>
+                     臺灣大道: AQI 75
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_652ef72b7374af8f3dcfd3bbe30c5e1f = L.circleMarker(
+                [23.9615945, 120.5631893],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_1a87ea7dab5e2b9a0109e5f09c1359e5 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_d3f54835404514468720aca0255b4408 = $(`<div id="html_d3f54835404514468720aca0255b4408" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 員林<br>                     <b>縣市:</b> 彰化縣<br>                     <b>AQI:</b> 82                 </div>                 </div>`)[0];
+                popup_1a87ea7dab5e2b9a0109e5f09c1359e5.setContent(html_d3f54835404514468720aca0255b4408);
+            
+        
+
+        circle_marker_652ef72b7374af8f3dcfd3bbe30c5e1f.bindPopup(popup_1a87ea7dab5e2b9a0109e5f09c1359e5)
+        ;
+
+        
+    
+    
+            circle_marker_652ef72b7374af8f3dcfd3bbe30c5e1f.bindTooltip(
+                `<div>
+                     員林: AQI 82
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_051d9b2e334e8c752d3a8b207fd0a1ed = L.circleMarker(
+                [22.98522502, 120.22216042],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_4ed96f7d6a48f93d64584fd7513a2b4b = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_98e50cd96c0f89206b0b57d9b490e437 = $(`<div id="html_98e50cd96c0f89206b0b57d9b490e437" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 林森<br>                     <b>縣市:</b> 臺南市<br>                     <b>AQI:</b> 103                 </div>                 </div>`)[0];
+                popup_4ed96f7d6a48f93d64584fd7513a2b4b.setContent(html_98e50cd96c0f89206b0b57d9b490e437);
+            
+        
+
+        circle_marker_051d9b2e334e8c752d3a8b207fd0a1ed.bindPopup(popup_4ed96f7d6a48f93d64584fd7513a2b4b)
+        ;
+
+        
+    
+    
+            circle_marker_051d9b2e334e8c752d3a8b207fd0a1ed.bindTooltip(
+                `<div>
+                     林森: AQI 103
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c88f166674b09cccf48a29f5038a58ac = L.circleMarker(
+                [23.71867609, 120.7944772],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_d3f56e2a66b5d9d63bcdbecf8d853e45 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_3c83452e3fc45b01bf75990a4253148b = $(`<div id="html_3c83452e3fc45b01bf75990a4253148b" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 南投（鹿谷）<br>                     <b>縣市:</b> 南投縣<br>                     <b>AQI:</b> 70                 </div>                 </div>`)[0];
+                popup_d3f56e2a66b5d9d63bcdbecf8d853e45.setContent(html_3c83452e3fc45b01bf75990a4253148b);
+            
+        
+
+        circle_marker_c88f166674b09cccf48a29f5038a58ac.bindPopup(popup_d3f56e2a66b5d9d63bcdbecf8d853e45)
+        ;
+
+        
+    
+    
+            circle_marker_c88f166674b09cccf48a29f5038a58ac.bindTooltip(
+                `<div>
+                     南投（鹿谷）: AQI 70
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_71388b5fc419633141d8d4dc1a5f020d = L.circleMarker(
+                [22.35222, 120.37722],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_7a1be96375dc17dcae4b790ce3d90cbe = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_594f9decef3dac2e4cc10d22f36c4812 = $(`<div id="html_594f9decef3dac2e4cc10d22f36c4812" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 屏東（琉球）<br>                     <b>縣市:</b> 屏東縣<br>                     <b>AQI:</b> 47                 </div>                 </div>`)[0];
+                popup_7a1be96375dc17dcae4b790ce3d90cbe.setContent(html_594f9decef3dac2e4cc10d22f36c4812);
+            
+        
+
+        circle_marker_71388b5fc419633141d8d4dc1a5f020d.bindPopup(popup_7a1be96375dc17dcae4b790ce3d90cbe)
+        ;
+
+        
+    
+    
+            circle_marker_71388b5fc419633141d8d4dc1a5f020d.bindTooltip(
+                `<div>
+                     屏東（琉球）: AQI 47
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_da3ba33884414b7ae8d5b1dcb5f8c99c = L.circleMarker(
+                [24.94902778, 121.38352778],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_b98e1327df0f7a59b10903949119bf80 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_c83097d39c36918638d1b444688f1865 = $(`<div id="html_c83097d39c36918638d1b444688f1865" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 新北（樹林）<br>                     <b>縣市:</b> 新北市<br>                     <b>AQI:</b> 85                 </div>                 </div>`)[0];
+                popup_b98e1327df0f7a59b10903949119bf80.setContent(html_c83097d39c36918638d1b444688f1865);
+            
+        
+
+        circle_marker_da3ba33884414b7ae8d5b1dcb5f8c99c.bindPopup(popup_b98e1327df0f7a59b10903949119bf80)
+        ;
+
+        
+    
+    
+            circle_marker_da3ba33884414b7ae8d5b1dcb5f8c99c.bindTooltip(
+                `<div>
+                     新北（樹林）: AQI 85
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_cdcd4d60db844f04d0f4fd8ce5caa7ce = L.circleMarker(
+                [22.260899, 120.651472],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_5598c7a85b6974bf553a765979909c24 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_596f0e47e794247107a31da40f6d04c8 = $(`<div id="html_596f0e47e794247107a31da40f6d04c8" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 屏東（枋山）<br>                     <b>縣市:</b> 屏東縣<br>                     <b>AQI:</b> 48                 </div>                 </div>`)[0];
+                popup_5598c7a85b6974bf553a765979909c24.setContent(html_596f0e47e794247107a31da40f6d04c8);
+            
+        
+
+        circle_marker_cdcd4d60db844f04d0f4fd8ce5caa7ce.bindPopup(popup_5598c7a85b6974bf553a765979909c24)
+        ;
+
+        
+    
+    
+            circle_marker_cdcd4d60db844f04d0f4fd8ce5caa7ce.bindTooltip(
+                `<div>
+                     屏東（枋山）: AQI 48
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_94f0a2aa83df8d250f8d700bf0c6a932 = L.circleMarker(
+                [23.51301, 120.44452],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_b1f7d16257cd39e5c509b478b0a193be);
+        
+    
+        var popup_1f3988af8e70f487a38ce2851658d9cb = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_253bbe51d506e86b060d93a80beaff63 = $(`<div id="html_253bbe51d506e86b060d93a80beaff63" style="width: 100.0%; height: 100.0%;">                 <div style="width: 220px;">                     <b>測站:</b> 嘉義（東區）<br>                     <b>縣市:</b> 嘉義市<br>                     <b>AQI:</b> 96                 </div>                 </div>`)[0];
+                popup_1f3988af8e70f487a38ce2851658d9cb.setContent(html_253bbe51d506e86b060d93a80beaff63);
+            
+        
+
+        circle_marker_94f0a2aa83df8d250f8d700bf0c6a932.bindPopup(popup_1f3988af8e70f487a38ce2851658d9cb)
+        ;
+
+        
+    
+    
+            circle_marker_94f0a2aa83df8d250f8d700bf0c6a932.bindTooltip(
+                `<div>
+                     嘉義（東區）: AQI 96
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+</script>
+</html>
